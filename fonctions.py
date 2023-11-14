@@ -1,5 +1,7 @@
 import os
 def extractNomsPres(fichier):
+    if type(fichier) != str:
+        raise("Illegal type for vairable fichier. fichier must be a str.")
     for i in "0123456789":
         fichier = fichier.replace(i, "")  # On supprime les valeurs numériques
     return (fichier[11:-4])  # On effectue un slicing pour récupérer uniquement le nom
@@ -47,14 +49,20 @@ def createTokens(nomDiscours):
                     f2.write(' ')
                     inMot = False
             else:
-                if car >= 'A' and car <= 'Z':
-                    f2.write(chr(ord(car) + ord('a') - ord('A')))
-                    inMot = True
-                elif ord(car) >= 192 and ord(car) <= 220:
-                    f2.write(chr(ord(car) + ord('é') - ord('É')))
-                else:
-                    f2.write(car)
-                    inMot = True
+                inMot = minuscule(car, f2, inMot)
+
+
+def minuscule(car, f2, inMot):
+    if car >= 'A' and car <= 'Z':
+        f2.write(chr(ord(car) + ord('a') - ord('A')))
+        inMot = True
+    elif ord(car) >= 192 and ord(car) <= 220:
+        f2.write(chr(ord(car) + ord('é') - ord('É')))
+    else:
+        f2.write(car)
+        inMot = True
+    return inMot
+
 
 def createCleanedFolder():
     nomsDiscours = []
