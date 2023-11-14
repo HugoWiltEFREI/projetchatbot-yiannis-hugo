@@ -23,7 +23,7 @@ def createTokenFiles(nomDiscours):
                 else:
                     f2.write(car)
                     inMot=True
-def createCleanedFolder():
+def fillCleanedFolder():
     nomsDiscours=[]
     for nom in os.listdir("speeches"):
         if nom.endswith("txt"):
