@@ -1,6 +1,6 @@
 import os
 
-def identifySpeChr(car):
+def identifySpeChr(car): #fonction qui détermine si un caractère est un catère spécial ou nom et renvoie un boulleen
     if ((car>=' ' and car<='/')) or (car>=':' and car<='?') or (car>='[' and car<='`') or (car>='{' and car<='}') or car=='\n':
         return True
     else:
@@ -30,5 +30,3 @@ def createCleanedFolder():
             nomsDiscours.append(nom)
     for nom in nomsDiscours:
         createTokenFiles(nom)
-
-createCleanedFolder()
