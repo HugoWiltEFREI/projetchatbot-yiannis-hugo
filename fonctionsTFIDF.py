@@ -2,6 +2,7 @@ from math import log10
 dico = {}
 dicoPourcent = {}
 dicoAdditions = {}
+from fonctions import creerListe
 
 
 def nombreOccurrence(chaineDeC):
@@ -20,7 +21,7 @@ def nombreDeMots(dictionnaire):
         total += int(i)
     return total
 
-def pourcentage(texte):
+def pourcentage(texte): #A changer pour effectuer calcul sur dico et pas texte
     dictionnaireOccurrence = nombreOccurrence(texte)
     nbreDeMots = int(nombreDeMots(dictionnaireOccurrence))
     for cle in dictionnaireOccurrence.keys():
@@ -28,9 +29,20 @@ def pourcentage(texte):
     return dicoPourcent
 
 def addition(directory):
-    for filename in os.listdir(directory):
+    liste = creerListe(directory)
+    for ele in liste:
+        location = directory+"/"+ele
+        f1 = open(location, "r", encoding=("utf8"))
+        dico1 = nombreOccurrence(f1)
+        for cle in dico1:
+            add = dicoAdditions.get(cle)
+            add = None if 0 else add #Si pas présent, add prends la valeur 0, sinon la valeur de la
+            dicoAdditions[cle] = dico1[cle] + add
+    return dicoAdditions
+
 
 
 import os
 def inverseDocumentFrequency(directory):
     for filename in os.listdir(directory):
+        print("r")

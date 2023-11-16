@@ -35,5 +35,9 @@ if __name__ == '__main__':
         texte3 = str(input("Entrez un texte"))
         print(pourcentage(texte3))
 
+    elif fct == "addition":
+        directory = str(input("Entrez un directory"))
+        print(addition(directory))
+
     else:
         print("Fonction inconnue, README.txt pour plus d'informations.")

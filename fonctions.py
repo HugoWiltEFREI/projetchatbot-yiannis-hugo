@@ -27,8 +27,7 @@ def list_of_files(directory, extension):
                 filename)  # Si l'extension du document correspond avec celle demandée, on rajoute à la liste
     files_names2 = []  # On créé une nouvelle liste
     for indice2 in range(len(files_names)):
-        if extractNomsPres(
-                files_names[indice2]) not in files_names2:  # Si les nom n'est pas présent dans la liste, on le rajoute
+        if extractNomsPres(files_names[indice2]) not in files_names2:  # Si les nom n'est pas présent dans la liste, on le rajoute
             files_names2.append(extractNomsPres(files_names[indice2]))
     return files_names2
 
@@ -64,9 +63,14 @@ def minuscule(car, f2, inMot):
 
 
 def createCleanedFolder():
+    listeDiscours = creerListe("speeches")
+    for nom in listeDiscours:
+        createTokens(nom)
+
+
+def creerListe(directory):
     nomsDiscours = []
-    for nom in os.listdir("speeches"):
+    for nom in os.listdir(directory):
         if nom.endswith("txt"):
             nomsDiscours.append(nom)
-    for nom in nomsDiscours:
-        createTokens(nom)
+    return nomsDiscours
