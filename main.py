@@ -1,4 +1,5 @@
 from fonctions import *
+from fonctionsTFIDF import *
 
 if __name__ == '__main__':
     fct = str(input("Quelle fonction voulez-vous utiliser? : "))
@@ -13,8 +14,6 @@ if __name__ == '__main__':
         print("Quel est le nom du Président : ")
         nom = str(input())
         print(associationTxtPrenomPres(nom))
-        e
-
 
     elif fct == "list_of_files":
         directory = str(input("directory : "))
@@ -23,6 +22,18 @@ if __name__ == '__main__':
 
     elif fct == "createCleanedFolder" or fct == "nettoyage":
         createCleanedFolder()
+
+    elif fct == "nombreOccurrence":
+        texte = str(input("Entrez un texte "))
+        print(nombreOccurrence(texte))
+
+    elif fct == "nombreDeMots":
+        texte2 = str(input("Entrez un texte"))
+        print(nombreDeMots(nombreOccurrence(texte2)))
+
+    elif fct == "pourcentage":
+        texte3 = str(input("Entrez un texte"))
+        print(pourcentage(texte3))
 
     else:
         print("Fonction inconnue, README.txt pour plus d'informations.")

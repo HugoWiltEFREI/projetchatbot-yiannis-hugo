@@ -51,7 +51,6 @@ def createTokens(nomDiscours):
             else:
                 inMot = minuscule(car, f2, inMot)
 
-
 def minuscule(car, f2, inMot):
     if car >= 'A' and car <= 'Z':
         f2.write(chr(ord(car) + ord('a') - ord('A')))
