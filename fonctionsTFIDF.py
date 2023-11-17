@@ -5,20 +5,18 @@ dicoAdditions = {}
 from fonctions import creerListe
 
 
-def nombreOccurrence(chaineDeC):
-    nombreOcc = dict()
-    listeDeMots = chaineDeC.split()
+def nombreOccurrence(chaineDeC): #On définie la fct nombreOccurrence avec comme argument chaine de caractère
+    nombreOcc = dict()  #On créer un dico vide où l'on va stocker le nombre d'occurrence des mots dans la chaine
+    listeDeMots = chaineDeC.split() #On délimite les mots en regardant où sont les espaces et on les stocks dans un liste
     for mots in listeDeMots:
         if mots in nombreOcc:
-            nombreOcc[mots] += 1
+            nombreOcc[mots] += 1 #Si le mot est déjà dans le dico, on fait +1
         else:
-            nombreOcc[mots] = 1
+            nombreOcc[mots] = 1 #Sinon on rajoute le mot dans le dico avec la valeur 1
     return nombreOcc
 
 def nombreDeMots(dictionnaire):
-    total = 0
-    for i in dictionnaire.values():
-        total += int(i)
+    total = sum(dictionnaire.values())
     return total
 
 def pourcentage(dico): #A changer pour effectuer calcul sur dico et pas texte
@@ -39,9 +37,13 @@ def addition(directory):
             dicoAdditions[val] = dico1[val] + add
     return dicoAdditions
 
-
-
 import os
 def inverseDocumentFrequency(directory):
-    for filename in os.listdir(directory):
-        print("r")
+    dictionnaireFinal = pourcentage(addition(directory))
+    for cle in dictionnaireFinal.keys():
+        dictionnaireFinal[cle] = log10(1/dictionnaireFinal[cle])
+    return dictionnaireFinal
+
+dico4 = {'pomme': 0.375, 'de': 0.125, 'terre': 0.125, 'jacques': 0.375}
+dico3 = {"pomme": 3,"de":1,"terre":1,"jacques":3}
+print(inverseDocumentFrequency(dico4))
