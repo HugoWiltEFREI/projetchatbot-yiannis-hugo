@@ -1,7 +1,6 @@
 from math import log10
 dico = {}
-dicoPourcent = {}
-dicoAdditions = {}
+
 from fonctions import creerListe
 
 
@@ -20,12 +19,14 @@ def nombreDeMots(dictionnaire):
     return total
 
 def pourcentage(dico): #A changer pour effectuer calcul sur dico et pas texte
+    dicoPourcent = {}
     nbreDeMots = int(nombreDeMots(dico))
     for cle in dico.keys():
         dicoPourcent[cle]=(dico[cle]/nbreDeMots)
     return dicoPourcent
 
 def addition(directory):
+    dicoAdditions = {}
     liste = creerListe(directory)
     for ele in liste:
         location = directory+"/"+ele
@@ -44,6 +45,5 @@ def inverseDocumentFrequency(directory):
         dictionnaireFinal[cle] = log10(1/dictionnaireFinal[cle])
     return dictionnaireFinal
 
-dico4 = {'pomme': 0.375, 'de': 0.125, 'terre': 0.125, 'jacques': 0.375}
-dico3 = {"pomme": 3,"de":1,"terre":1,"jacques":3}
-print(inverseDocumentFrequency(dico4))
+
+
