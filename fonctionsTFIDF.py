@@ -14,29 +14,6 @@ def nombreOccurrence(chaineDeC): #On définie la fct nombreOccurrence avec comme
             nombreOcc[mots] = 1 #Sinon on rajoute le mot dans le dico avec la valeur 1
     return nombreOcc
 
-def nombreDeMots(dictionnaire):
-    total = sum(dictionnaire.values())
-    return total
-
-def pourcentage(dico): #A changer pour effectuer calcul sur dico et pas texte
-    dicoPourcent = {}
-    nbreDeMots = int(nombreDeMots(dico))
-    for cle in dico.keys():
-        dicoPourcent[cle]=(dico[cle]/nbreDeMots)
-    return dicoPourcent
-
-def addition(directory):
-    dicoAdditions = {}
-    liste = creerListe(directory)
-    for ele in liste:
-        location = directory+"/"+ele
-        f1 = open(location, "r", encoding=("utf8"))
-        dico1 = nombreOccurrence(f1)
-        for val in dico1.values():
-            add = dicoAdditions.get(val)
-            add = None if 0 else add #Si pas présent, add prends la valeur 0, sinon la valeur de la
-            dicoAdditions[val] = dico1[val] + add
-    return dicoAdditions
 
 import os
 def inverseDocumentFrequency(directory):
