@@ -17,7 +17,7 @@ def getCleanedFilesNames():
             list.append(file)
     return tuple(list)
 #La fonction renvoie les vecteur sous forme de dicos
-#Dico sous forme : nomFichier (sans l'extension .txt !) -> Mot -> nbOccurrence
+#Dico sous forme : [nom président + numéro] -> Mot -> nbOccurrence
 def getVectorsDico():
     vectors={}
     filesList=getCleanedFilesNames()
@@ -26,7 +26,7 @@ def getVectorsDico():
     return vectors
 #Renvoie dictionnaire de l'ensemble des mots et leurs occurrences tout fichier confondu
 # Mot -> Occurence
-def getWordsOccurenceDico():
+def getWordsOccurrenceDico():
     occur={}
     vectors=getVectorsDico()
     for discours in vectors.keys():
