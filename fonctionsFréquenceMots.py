@@ -37,11 +37,5 @@ def getWordsOccurrenceDico(directory):
                 occur[mot]=vectors[discours][mot]
     return occur
 
-while True:
-    mot=input("Saisir mot : ")
-    if mot in getWordsOccurrenceDico("cleaned").keys():
-        print(getWordsOccurrenceDico("cleaned")[mot])
-    else:
-        print(0)
 
 
