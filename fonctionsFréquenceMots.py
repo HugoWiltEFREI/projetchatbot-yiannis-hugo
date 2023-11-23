@@ -1,4 +1,5 @@
 import os
+from math import log10
 #La fonction remplie dans vectors le dictionnaire d'occurrence de chaque mot du fichier file
 def createVector(file,vectors,directory):
     nom=file[8:-4]
@@ -25,7 +26,7 @@ def getVectorsDico(directory):
         createVector(file,vectors,directory)
     return vectors
 #Renvoie dictionnaire de l'ensemble des mots et leurs occurrences tout fichier confondu
-# Mot -> Occurence
+# Mot -> Occurrence
 def getWordsOccurrenceDico(directory):
     occur={}
     vectors=getVectorsDico(directory)
@@ -37,5 +38,23 @@ def getWordsOccurrenceDico(directory):
                 occur[mot]=vectors[discours][mot]
     return occur
 
+def proportionDansDirectory(mot,directory):
+    nbPresences=0
+    effectifTotal=0
+    for discours in getCleanedFilesNames(directory):
+        if mot in getVectorsDico(directory)[discours[8:-4]]:
+            nbPresences+=1
+            effectifTotal+=1
+        else:
+            effectifTotal+=1
+    return (nbPresences/effectifTotal)
 
+def dicoIDF(directory):
+    dico={}
+    for mot in getWordsOccurrenceDico("cleaned").keys():
+        dico[mot]=log10(1/proportionDansDirectory(mot,"cleaned"))
+    return dico
 
+while True:
+    mot=input("Saisir mot : ")
+    print("Sa proportion dans le corpus est de :",dicoIDF("cleaned")[mot])
