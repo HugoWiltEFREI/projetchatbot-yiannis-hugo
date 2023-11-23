@@ -25,6 +25,9 @@ def traiterLettre(car,inMot,f2):
         inMot=True
     elif ord(car)>=192 and ord(car)<=220:
         f2.write(chr(ord(car)+ord('é')-ord('É')))
+    elif car=='Œ' or car=='œ':
+        f2.write("oe")
+        inMot=True
     else:
         f2.write(car)
         inMot=True
@@ -38,4 +41,6 @@ def createCleanedFolder():
             nomsDiscours.append(nom)
     for nom in nomsDiscours:
         createTokenFiles(nom)
+
+createCleanedFolder()
 
