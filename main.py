@@ -1,4 +1,4 @@
-from fonctions import *
+from fonctionsDeBase import *
 from fonctionsTFIDF import *
 from fonctionsCleanedFolder import *
 from fonctionsFréquenceMots import *
