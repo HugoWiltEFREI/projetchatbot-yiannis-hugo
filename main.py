@@ -30,8 +30,8 @@ if __name__ == '__main__':
         texte = str(input("Entrez un texte "))
         print(nombreOccurrence(texte))
 
-    elif fct == "proportionMot":
-        print(proportionMot("cleaned"))
+    elif fct == "dicoIDF":
+        print(dicoIDF("cleaned"))
 
     else:
         print("Fonction inconnue, README.txt pour plus d'informations.")
