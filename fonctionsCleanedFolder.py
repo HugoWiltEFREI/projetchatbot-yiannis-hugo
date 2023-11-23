@@ -8,12 +8,12 @@ def identifySpeChr(car):
 
 #pour 1 fichier discours la fonction crée son fichier de tokens dans le dossier cleaned
 def createTokenFiles(nomDiscours):
-    with open("speeches/{}".format(nomDiscours),"r",encoding=("utf8")) as f1, open("cleaned/cleaned_{}".format(nomDiscours[11:]),"w",encoding=("utf8")) as f2:
+    with open("speeches/{}".format(nomDiscours),"r",encoding=("utf8")) as f1, open("cleaned/{}".format(nomDiscours[11:]),"w",encoding=("utf8")) as f2:
         inMot=False
         for car in f1.read():
             if identifySpeChr(car):
                 if inMot==True:
-                    f2.write('\n')
+                    f2.write(' ')
                     inMot=False
             else:
                 inMot=traiterLettre(car,inMot,f2)
@@ -38,3 +38,4 @@ def createCleanedFolder():
             nomsDiscours.append(nom)
     for nom in nomsDiscours:
         createTokenFiles(nom)
+
