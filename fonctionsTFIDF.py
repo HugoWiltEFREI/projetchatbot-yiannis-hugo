@@ -1,8 +1,3 @@
-from math import log10
-dico = {}
-
-from fonctions import creerListe
-
 
 def nombreOccurrence(chaineDeC): #On définie la fct nombreOccurrence avec comme argument chaine de caractère
     nombreOcc = dict()  #On créer un dico vide où l'on va stocker le nombre d'occurrence des mots dans la chaine
@@ -13,14 +8,6 @@ def nombreOccurrence(chaineDeC): #On définie la fct nombreOccurrence avec comme
         else:
             nombreOcc[mots] = 1 #Sinon on rajoute le mot dans le dico avec la valeur 1
     return nombreOcc
-
-
-import os
-def inverseDocumentFrequency(directory):
-    dictionnaireFinal = pourcentage(addition(directory))
-    for cle in dictionnaireFinal.keys():
-        dictionnaireFinal[cle] = log10(1/dictionnaireFinal[cle])
-    return dictionnaireFinal
 
 
 
