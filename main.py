@@ -2,6 +2,7 @@ from fonctionsDeBase import *
 from fonctionsTFIDF import *
 from fonctionsCleanedFolder import *
 from fonctionsFréquenceMots import *
+from fonctionsSecondaires import *
 
 
 if __name__ == '__main__':
@@ -26,12 +27,26 @@ if __name__ == '__main__':
     elif fct == "createCleanedFolder" or fct == "nettoyage":
         createCleanedFolder()
 
-    elif fct == "termFrequency":
-        texte = str(input("Entrez un texte "))
-        print(nombreOccurrence(texte))
+    elif fct == "TF":
+        directory = str(input("Enter a text : "))
+        print(termFrequency(directory))
 
-    elif fct == "dicoIDF":
-        print(dicoIDF("cleaned"))
+    elif fct == "TF-IDF":
+        directory = str(input("Enter directory : "))
+        print(matriceTFIDF(directory))
+
+    elif fct == "programmes": #Fait les questions de (Fonctionnalités à développer)
+        print("La liste des mots avec un score TF-IDF de 0 est : ", end="")
+        print(uselessWordsList("cleaned"))
+        print("La liste des mots avec un score TF-IDF de val est : ", end="")
+        print(rareWordsList("cleaned",0.9))
+        print("Le mot le plus utilisé par Chirac est : ", end="")
+        print(motImportantDiscours(additionDico(["Chirac1.txt", "Chirac2.txt"], "cleaned")))
+        print(motDit("nation","cleaned"))
+        print("Le mot est utilisé en premier par ", end="")
+        print(firstOccurrence("climat", "cleaned"))
+        print(firstOccurrence("écologie", "cleaned"))
+
 
     else:
         print("Fonction inconnue, README.txt pour plus d'informations.")
