@@ -40,8 +40,7 @@ def firstOccurrence(motCherche, directoryOccurrence):
         return valMin[:-4]
 
 
-def uselessWordsList(directory):
-    matrice=matriceTFIDF(directory)
+def uselessWordsList(matrice):
     useless=set()
     for discours in matrice.keys():
         for mot in matrice[discours].keys():
