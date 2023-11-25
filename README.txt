@@ -1,4 +1,3 @@
-
 ███████ ███████ ██████  ███████ ██
 ██      ██      ██   ██ ██      ██
 █████   █████   ██████  █████   ██
@@ -8,7 +7,6 @@ Membres du groupe : Yiannis LEBLANC, Hugo WILT
 Lien vers le github : https://github.com/HugoWiltEFREI/projetchatbot-yiannis-hugo/tree/master
 
 Fonctionnalités principales :
-
 extractNomsPres (ou extraction dans menu):
 Extraire les noms des présidents à partir des noms des fichiers texte fournis
 
@@ -37,3 +35,6 @@ Fonctions qui permet d'exécuter toutes les fonctions dans : Fonctionnalités à
 ->motImportantDiscours mot le plus répété par un président (en utilisant la fonction addition si le président à fais plusieurs discours)
 ->motDit renvoie les discours dans lesquels le mot est présent avec le nombre d'occurrence et le président ayant dit le mot le plus de fois
 ->firstOccurrence renvoie le premier président à avoir dit le mot
+
+help:
+Imprime le fichier README.txt
