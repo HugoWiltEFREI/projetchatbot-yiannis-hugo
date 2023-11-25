@@ -19,7 +19,7 @@ if __name__ == '__main__':
         nom = str(input())
         print(associationTxtPrenomPres(nom))
 
-    elif fct == "list_of_files":
+    elif fct == "list_of_files" or fct == "liste":
         directory = str(input("directory : "))
         extension = str(input("extension : "))
         print(list_of_files(directory, extension))
@@ -27,25 +27,26 @@ if __name__ == '__main__':
     elif fct == "createCleanedFolder" or fct == "nettoyage":
         createCleanedFolder()
 
-    elif fct == "TF":
+    elif fct == "termFrequency" or fct == "TF":
         directory = str(input("Enter a text : "))
         print(termFrequency(directory))
+
+    elif fct == "dicoIDF" or fct == "IDF":
+        directory = str(input("Enter directory : "))
+        print(dicoIDF(directory))
 
     elif fct == "TF-IDF":
         directory = str(input("Enter directory : "))
         print(matriceTFIDF(directory))
 
     elif fct == "programmes": #Fait les questions de (Fonctionnalités à développer)
-        print("La liste des mots avec un score TF-IDF de 0 est : ", end="")
-        print(uselessWordsList("cleaned"))
-        print("La liste des mots avec un score TF-IDF de val est : ", end="")
-        print(rareWordsList("cleaned",0.9))
-        print("Le mot le plus utilisé par Chirac est : ", end="")
-        print(motImportantDiscours(additionDico(["Chirac1.txt", "Chirac2.txt"], "cleaned")))
-        print(motDit("nation","cleaned"))
-        print("Le mot est utilisé en premier par ", end="")
-        print(firstOccurrence("climat", "cleaned"))
-        print(firstOccurrence("écologie", "cleaned"))
+        print("La liste des mots avec un score TF-IDF de 0 est : ",uselessWordsList("cleaned"))
+        val = float(input("Entrez la rareté que vous voulez (0-1):"))
+        print("La liste des mots avec un score TF-IDF de ",val,"est :",rareWordsList("cleaned",val))
+        print("Le mot le plus utilisé par Chirac est :", motImportantDiscours(additionDico(["Chirac1.txt", "Chirac2.txt"], "cleaned")))
+        print("Mot prononcé par :",motDit("nation","cleaned"))
+        print("Premier président à dire climat est",firstOccurrence("climat", "cleaned"))
+        print("Premier président à dire écologie est",firstOccurrence("écologie", "cleaned"))
 
 
     else:
