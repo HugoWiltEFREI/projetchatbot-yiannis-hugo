@@ -4,7 +4,6 @@ from fonctionsCleanedFolder import *
 from fonctionsFréquenceMots import *
 from fonctionsSecondaires import *
 
-
 if __name__ == '__main__':
     fct = str(input("Quelle fonction voulez-vous utiliser? : "))
 
@@ -48,6 +47,9 @@ if __name__ == '__main__':
         print("Premier président à dire climat est",firstOccurrence("climat", "cleaned"))
         print("Premier président à dire écologie est",firstOccurrence("écologie", "cleaned"))
 
-
+    elif fct =="help":
+        with open("README.txt", "r", encoding="utf8") as f:
+            for ligne in f:
+                print(ligne)
     else:
         print("Fonction inconnue, README.txt pour plus d'informations.")
