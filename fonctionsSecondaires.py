@@ -34,13 +34,14 @@ def firstOccurrence(motCherche, directoryOccurrence):
                     dicoOccurrence[discoursOccurrence]=i+1
                     break
     if dicoOccurrence == {}:
-        return "Mot non utilisé"
+        return "personne"
     else:
         valMin = min(dicoOccurrence, key=dicoOccurrence.get)
         return valMin[:-4]
 
 
-def uselessWordsList(matrice):
+def uselessWordsList(directory):
+    matrice=matriceTFIDF(directory)
     useless=set()
     for discours in matrice.keys():
         for mot in matrice[discours].keys():
@@ -50,11 +51,11 @@ def uselessWordsList(matrice):
 
 def rareWordsList(directory,val):
     matrice=matriceTFIDF(directory)
-    useless=set()
+    rare=set()
     for discours in matrice.keys():
         for mot in matrice[discours].keys():
             if matrice[discours][mot]>=val:
-                useless.add(mot)
-    return useless
+                rare.add(mot)
+    return rare
 
 
