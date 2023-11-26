@@ -1,3 +1,4 @@
+
 ███████ ███████ ██████  ███████ ██
 ██      ██      ██   ██ ██      ██
 █████   █████   ██████  █████   ██
@@ -35,6 +36,10 @@ Fonctions qui permet d'exécuter toutes les fonctions dans : Fonctionnalités à
 ->motImportantDiscours mot le plus répété par un président (en utilisant la fonction addition si le président à fais plusieurs discours)
 ->motDit renvoie les discours dans lesquels le mot est présent avec le nombre d'occurrence et le président ayant dit le mot le plus de fois
 ->firstOccurrence renvoie le premier président à avoir dit le mot
+->recurrentWordsList Mots que tous les présidents ont évoques (hormis non importants)
 
 help:
 Imprime le fichier README.txt
+
+plot:
+Plot un graph qui montre le nombre d'occurrence de chaque mots supérieurs à val pour chaque documents du directory
