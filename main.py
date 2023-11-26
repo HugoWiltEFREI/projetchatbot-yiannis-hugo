@@ -1,8 +1,8 @@
 from fonctionsDeBase import *
 from fonctionsTFIDF import *
 from fonctionsCleanedFolder import *
-from fonctionsFréquenceMots import *
 from fonctionsSecondaires import *
+from fonctionsEnPlus import plot
 
 if __name__ == '__main__':
     fct = str(input("Quelle fonction voulez-vous utiliser? : "))
@@ -10,6 +10,7 @@ if __name__ == '__main__':
     if fct == "extractNomsPres" or fct == "extraction":  # Fonction qui sert à extraire le Nom d'un Président grâce au nom du document
         print("Quel nom de fichier voulez vous extraire")  # On demande de quel document on veux connaitre le Président
         fichier = str(input())  # On stock le nom du document de la variable nom
+        extractNomsPres(2)
         print(extractNomsPres(fichier))  # On éxécute la fonction avec la variable nom et on imprime
 
     elif fct == "associationTxtPrenomPres" or fct == "association":
@@ -50,5 +51,12 @@ if __name__ == '__main__':
         with open("README.txt", "r", encoding="utf8") as f:
             for ligne in f:
                 print(ligne)
+
+    elif fct == "plot": #Plot un graph qui montre le nombre d'occurrence de chaque mots supérieurs à val pour chaques documents du directory
+        directory = str(input("Enter directory: "))
+        val = int(input("Enter a value above 20: "))
+        plot(directory,val)
+
+
     else:
         print("Fonction inconnue, README.txt pour plus d'informations.")
