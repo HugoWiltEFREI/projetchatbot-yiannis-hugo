@@ -42,4 +42,4 @@ help:
 Imprime le fichier README.txt
 
 plot:
-Plot un graph qui montre le nombre d'occurrence de chaque mots supérieurs à val pour chaque documents du directory
+Plot un graph qui montre le nombre d'occurrence de chaque mots supérieurs à val pour chaque documents du directory (nécessite installation Matplotlib)
