@@ -45,7 +45,7 @@ if __name__ == '__main__':
         print("Mot prononcé par :",motDit("nation","cleaned"))
         print("Premier président à dire climat est",firstOccurrence("climat", "cleaned"))
         print("Premier président à dire écologie est",firstOccurrence("écologie", "cleaned"))
-        print("Mots que tous les présidents ont évoques (hormis non important",recurrentWordsList("cleaned"))
+        print("Mots que tous les présidents ont évoqués (hormis non important)",recurrentWordsList("cleaned"))
 
     elif fct =="help":
         with open("README.txt", "r", encoding="utf8") as f:
