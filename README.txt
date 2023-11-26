@@ -5,7 +5,7 @@
 ██      ██      ██   ██ ██      ██
 ███████ ██      ██   ██ ███████ ██
 Membres du groupe : Yiannis LEBLANC, Hugo WILT
-Lien vers le github : https://github.com/HugoWiltEFREI/projetchatbot-yiannis-hugo/tree/master
+Lien vers le github : https://github.com/HugoWiltEFREI/projetchatbot-yiannis-hugo
 
 Fonctionnalités principales :
 extractNomsPres (ou extraction dans menu):
