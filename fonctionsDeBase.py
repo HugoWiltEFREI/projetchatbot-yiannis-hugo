@@ -17,7 +17,7 @@ def associationTxtPrenomPres(nom):
             print("Le prénom du Président", nom, "est",  ListeNomsPres[indice][1])  # Si oui, on affiche le prénom et le nom
             trouve = True
     if trouve == False:
-        print("Inconnu au bataillon")  # Si non, on affiche que l'on n'a pas trouvé
+        return("Inconnu au bataillon")  # Si non, on affiche que l'on n'a pas trouvé
 
 def list_of_files(directory, extension):
     files_names = []  # On créé une liste vide
