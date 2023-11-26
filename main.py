@@ -17,11 +17,10 @@ if __name__ == '__main__':
         print("Quel est le nom du Président : ")
         nom = str(input())
         print(associationTxtPrenomPres(nom))
-
+        
     elif fct == "list_of_files" or fct == "liste":
-        directory = str(input("directory : "))
         extension = str(input("extension : "))
-        print(list_of_files(directory, extension))
+        print(list_of_files("speeches", extension))
 
     elif fct == "createCleanedFolder" or fct == "nettoyage":
         createCleanedFolder()
