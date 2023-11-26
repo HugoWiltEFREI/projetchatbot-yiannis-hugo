@@ -58,4 +58,17 @@ def rareWordsList(directory,val):
                 rare.add(mot)
     return rare
 
+def recurrentWordsList(directory):
+    scoreMinimum=2
+    uselessWords=uselessWordsList(directory)
+    dicoTF={}
+    recurrentWords=set()
+    for file in getCleanedFilesNames(directory):
+        with open("{}/{}".format(directory,file),'r',encoding="utf-8") as discours:
+            dicoTF=termFrequency(discours.read())
+            for mot in dicoTF.keys():
+                if dicoTF[mot]<scoreMinimum and mot in uselessWords:
+                    recurrentWords.add(mot)
+    return recurrentWords
+
 
