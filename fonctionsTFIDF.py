@@ -19,9 +19,10 @@ def getCleanedFilesNames(directory):
             list.append(file)
     return tuple(list)
 
-def dicoIDF(directory,filesList):
+def dicoIDF(directory):
     dicoMots={}
     nbFichier=0
+    filesList = getCleanedFilesNames(directory)
     for discours in filesList:
         nbFichier+=1
         with open("{}/{}".format(directory,discours),'r',encoding="utf8") as file:
@@ -37,11 +38,12 @@ def dicoIDF(directory,filesList):
         dicoMots[mot]=log10(nbFichier/dicoMots[mot])
     return dicoMots
 
+
 def matriceTFIDF(directory):
     TFIDF={}
     TF={}
     filesList=getCleanedFilesNames(directory)
-    IDF=dicoIDF(directory,filesList)
+    IDF=dicoIDF(directory)
     for file in filesList:
         with open("{}/{}".format(directory,file),'r',encoding="utf8") as discours:
             TF=termFrequency(discours.read())
@@ -49,3 +51,4 @@ def matriceTFIDF(directory):
         for mot in TF:
             TFIDF[file[:-4]][mot]=TF[mot]*IDF[mot]
     return TFIDF
+
