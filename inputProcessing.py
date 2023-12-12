@@ -13,10 +13,10 @@ def tokenList(text):
                 tokens.append("")
                 index+=1
                 inMot=True
-            lettreMinuscule(car, tokens, index)
+            traiterLettreMinuscule(car, tokens, index)
     return tokens
 
-def lettreMinuscule(car, tokensList, index):
+def traiterLettreMinuscule(car, tokensList, index):
     if 'A' <= car <= 'Z':
         tokensList[index]+=(chr(ord(car) + ord('a') - ord('A')))
     elif 192 <= ord(car) <= 220:
