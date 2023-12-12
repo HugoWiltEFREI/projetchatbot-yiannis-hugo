@@ -1,5 +1,7 @@
 # Il est impossible de modifier la fct "createTokenFile()" pour cette étape, le fctmnt est trop différent
 from fonctionsCleanedFolder import identifySpeChr
+import fonctionsTFIDF as TFIDF
+
 def tokenList(text):
     tokens=[]
     index=-1
@@ -25,3 +27,12 @@ def traiterLettreMinuscule(car, tokensList, index):
         tokensList[index]+=("oe")
     else:
         tokensList[index]+=(car)
+
+def isInCorpus(mot):
+    matrice=TFIDF.matriceTFIDF("cleaned")
+    corpus=set()
+    inCorpus=False
+    for discours in matrice.keys():
+        if mot in matrice[discours].keys():
+            inCorpus=True
+    return inCorpus
