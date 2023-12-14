@@ -37,5 +37,35 @@ def docPlusPertinent(matriceTFIDF,vecteurTFIDF):
 def equivalentNom(nomFichier):
     return "Nomination_"+nomFichier
 
-matrice = matriceDicoToMatriceList(matriceTFIDF("cleaned"),"cleaned")
-print(docPlusPertinent(matrice,vecteurTFIDF("Peux-tu me dire comment une nation peut-elle prendre soin du climat","cleaned")))
+#matrice = matriceDicoToMatriceList(matriceTFIDF("cleaned"),"cleaned")
+#print(docPlusPertinent(matrice,vecteurTFIDF("Peux-tu me dire comment une nation peut-elle prendre soin du climat","cleaned")))
+
+def motScoreTFIDF(question, directory):
+    return max(vecteurTFIDF(question,directory), key=vecteurTFIDF(question,directory).get)
+
+def rechercheFirstOccurenc(mot, document):
+    occurrence = 0
+    motMin = mot.lower()
+    with open("speeches/{}".format(document), "r", encoding="utf8") as f1:
+        liste = f1.read().lower().split("\n")
+        for i in range(len(liste)):
+            val = liste[i].find(motMin)
+            if val != -1:
+                return liste[i]
+
+def politesse(question):
+    question_starters = {
+        "Comment": "Après analyse, ",
+        "Pourquoi": "Car, ",
+        "Peux-tu": "Oui, bien sûr!"
+    }
+    reponseQuestion = rechercheFirstOccurenc("climat","Nomination_Macron.txt")
+    debutDePhrase = question.split()[0]
+    for keys, values in question_starters.items():
+        if str(keys) == debutDePhrase:
+            if str(keys) == "Peux-tu":
+                return values+" "+reponseQuestion.capitalize()
+            else:
+                return values + " " + reponseQuestion
+
+print(politesse("Peux-tu me dire comment une nation peut-elle prendre soin du climat ?"))
