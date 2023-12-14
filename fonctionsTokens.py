@@ -1,7 +1,9 @@
 from fonctionsTFIDF import dicoIDF, matriceTFIDF
+from fonctionsCleanedFolder import identifySpeChr
 def tokenQuestion(chaineDeCToken:str):
-    for i in ",?;.:/!":
-        chaineDeCToken = chaineDeCToken.replace(i, " ")
+    for c in chaineDeCToken:
+        if identifySpeChr(c):
+            chaineDeCToken = chaineDeCToken.replace(c, " ")
     for i in chaineDeCToken:
         chaineDeCToken = chaineDeCToken.lower()
     questionToken = chaineDeCToken.split()
@@ -38,4 +40,6 @@ def vecteurTFIDF(question:str,directory):
                 if keys == ke:
                     dicoVecteurTFIDF[keys] = values*va
     return dicoVecteurTFIDF
+
+
 
