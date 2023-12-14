@@ -52,6 +52,5 @@ def isInList(element,liste):
     else:
         return False
 
-print(matriceDicoToMatriceList(matriceTFIDF("cleaned"),"cleaned"))
 
 
