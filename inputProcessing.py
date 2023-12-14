@@ -29,10 +29,43 @@ def traiterLettreMinuscule(car, tokensList, index):
         tokensList[index]+=(car)
 
 def isInCorpus(mot):
-    matrice=TFIDF.matriceTFIDF("cleaned")
+    matrice=TFIDF.matrice("cleaned")
     corpus=set()
     inCorpus=False
     for discours in matrice.keys():
         if mot in matrice[discours].keys():
             inCorpus=True
     return inCorpus
+
+#+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+#vector de question
+from fonctionsTFIDF import dicoIDF
+
+def scoreTF(mot,question):
+    score=0
+    listeTokens=tokenList(question)
+    for token in listeTokens:
+        if token==mot:
+            score+=1
+    score=score/len(listeTokens)
+    return score
+
+from fonctionsTFIDF import matriceTFIDF
+
+def TFIDFQuestion(question,corpusDirectory):
+    matrice=matriceTFIDF(corpusDirectory)
+    IDF=dicoIDF(corpusDirectory)
+    for discours in matrice.keys():
+        for mot in matrice[discours].keys():
+            matrice[discours][mot]=scoreTF(mot,question)*IDF[mot]
+    return matrice
+
+    
+    
+
+    
+
+    
+    
+    
+
