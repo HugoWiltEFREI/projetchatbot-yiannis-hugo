@@ -8,6 +8,7 @@ def additionDico(listeDico, directory):
             chaine = file1.read()
             dictionnaire = termFrequency(chaine)
         dicoAdd.update(dictionnaire)
+        file1.close()
     return dicoAdd
 
 
@@ -26,6 +27,7 @@ def motDit(mot,
             if mot in dictionnaire.keys():
                 dico[discours] = dictionnaire[mot]
         motMax = max(dico, key=dico.get)
+        file1.close()
     return dico, motMax[:-4]
 
 
@@ -38,6 +40,7 @@ def firstOccurrence(motCherche, directoryOccurrence):
                 if str(listeMot[i]) == motCherche:
                     dicoOccurrence[discoursOccurrence] = i + 1
                     break
+            file1.close()
     if dicoOccurrence == {}:
         return "personne"
     else:
@@ -75,4 +78,5 @@ def recurrentWordsList(directory):
             for mot in dicoTF.keys():
                 if dicoTF[mot] < scoreMinimum and mot in uselessWords:
                     recurrentWords.add(mot)
+        discours.close()
     return recurrentWords
