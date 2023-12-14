@@ -22,6 +22,8 @@ def createTokenFiles(nomDiscours):
                     inMot = False
             else:
                 inMot = traiterLettre(car, inMot, f2)
+    f1.close()
+    f2.close()
 
 
 # créée pour diviser la fct createTokenFiles() en deux fonctions plus petites
