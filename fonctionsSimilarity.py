@@ -20,7 +20,7 @@ def bestDocument(vectorQuestion,matriceCorpus):
     scoreDoc=0
     for document in matriceCorpus.keys():
         scoreDoc=similarityScore(vectorQuestion,matriceCorpus[document])
-        if scoreDoc>meilleurs[score]:
+        if scoreDoc>meilleurs["score"]:
             meilleurs["nom"]=document
             meilleurs["score"]=scoreDoc
     return meilleurs["nom"]
