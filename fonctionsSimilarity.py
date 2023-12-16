@@ -1,47 +1,42 @@
 from math import sqrt
-from fonctionsNewMatrice import *
-from fonctionsTokens import vecteurTFIDF
+from fonctionsTokens import vectorTFIDFQuestion
+from fonctionsTFIDF import matriceTFIDF
 def produitScalaire(vecteurA, vecteurB):
-    M = len(vecteurA)
     produit = float(0)
-    for i in range(M):
-        produit += vecteurA[i]*vecteurB[i]
+    for mot in vecteurA.keys():
+        if mot in vecteurB.keys():
+            produit+=vecteurA[mot]*vecteurB[mot]
     return produit
 
-def normeVecteur(vecteur):
-    M = len(vecteur)
-    norme = float(0)
-    for i in range(M):
-        norme += vecteur[i]*vecteur[i]
-    return sqrt(norme)
+def normeVector(vector):
+    norme=0
+    for mot in vector.keys():
+        norme+=vector[mot]**2
+    norme=sqrt(norme)
+    if norme!=0:
+        return norme
+    else:
+        return 1
 
-def similarity(vecteurA,vecteurB):
-    return (produitScalaire(vecteurA,vecteurB))/(normeVecteur(vecteurA)*normeVecteur(vecteurB))
-
-def docPlusPertinent(matriceTFIDF,vecteurTFIDF):
-    maxSim = 0
-    sim = 0
-    k = 0
-    for i in range(len(matriceTFIDF[0])-1):
-        for j in range(len(matriceTFIDF)):
-            for keys, values in vecteurTFIDF.items():
-                if values != 0.0:
-                    while matriceTFIDF[k][0] != keys:
-                        k = k + 1
-                    sim += similarity(keys, matriceTFIDF[j][i+1])
-        if maxSim<sim:
-            maxSim = sim
-    return maxSim
-
+def similarityScore(vectorA,vectorB):
+    score=produitScalaire(vectorA,vectorB)/(normeVector(vectorA)*normeVector(vectorB))
+    return score
 
 def equivalentNom(nomFichier):
-    return "Nomination_"+nomFichier
+    return "Nomination_"+nomFichier+".txt"
 
-#matrice = matriceDicoToMatriceList(matriceTFIDF("cleaned"),"cleaned")
-#print(docPlusPertinent(matrice,vecteurTFIDF("Peux-tu me dire comment une nation peut-elle prendre soin du climat","cleaned")))
+def bestDocument(vectorQuestion,matriceCorpus):
+    meilleurs={"nom":"Aucun discours ne correspond à cette question.","score":0}
+    scoreDoc=0
+    for document in matriceCorpus.keys():
+        scoreDoc=similarityScore(vectorQuestion,matriceCorpus[document])
+        if scoreDoc>meilleurs["score"]:
+            meilleurs["nom"]=document
+            meilleurs["score"]=scoreDoc
+    return equivalentNom(meilleurs["nom"])
 
 def motScoreTFIDF(question, directory):
-    return max(vecteurTFIDF(question,directory), key=vecteurTFIDF(question,directory).get)
+    return max(vectorTFIDFQuestion(question,directory), key=vectorTFIDFQuestion(question,directory).get)
 
 def rechercheFirstOccurenc(mot, document):
     occurrence = 0
@@ -52,14 +47,14 @@ def rechercheFirstOccurenc(mot, document):
             val = liste[i].find(motMin)
             if val != -1:
                 return liste[i]
-
-def politesse(question):
+def politesse(question, directory):
     question_starters = {
         "Comment": "Après analyse, ",
         "Pourquoi": "Car, ",
         "Peux-tu": "Oui, bien sûr!"
     }
-    reponseQuestion = rechercheFirstOccurenc("climat","Nomination_Macron.txt")
+    document = bestDocument(vectorTFIDFQuestion(question,directory),matriceTFIDF(directory))
+    reponseQuestion = rechercheFirstOccurenc("climat",document)
     debutDePhrase = question.split()[0]
     for keys, values in question_starters.items():
         if str(keys) == debutDePhrase:
@@ -68,4 +63,3 @@ def politesse(question):
             else:
                 return values + " " + reponseQuestion
 
-print(politesse("Peux-tu me dire comment une nation peut-elle prendre soin du climat ?"))
