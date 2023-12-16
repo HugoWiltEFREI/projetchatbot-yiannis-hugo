@@ -4,6 +4,7 @@ from fonctionsCleanedFolder import *
 from fonctionsSecondaires import *
 from fonctionsEnPlus import plot
 from fonctionsTokens import *
+from fonctionsSimilarity import *
 
 if __name__ == '__main__':
     partie = str(input("Partie I ou Chatbot? "))
@@ -71,7 +72,17 @@ if __name__ == '__main__':
         if fct == "vecteurTFIDF":
             question = str(input("Entrez la question"))
             directory = str(input("Enter directory : "))
-            print(vecteurTFIDF(question, directory))
-
+            print(vectorTFIDFQuestion(question, directory))
+        elif fct =="Chatbot":
+            encore = True
+            directory = str(input("Enter directory : "))
+            while encore == True:
+                question = str(input("Que puis-je faire pour vous? "))
+                print(politesse(question, directory))
+                encore = str(input("Avez vous encore une question? "))
+                if encore == "Oui":
+                    encore = True
+                else:
+                    encore = False
         else:
             print("Fonction inconnue, README.txt pour plus d'informations.")
