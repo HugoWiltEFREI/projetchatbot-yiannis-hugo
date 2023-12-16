@@ -1,4 +1,5 @@
 from fonctionsTFIDF import dicoIDF, matriceTFIDF
+from inputProcessing import tokenList
 
 def scoreTF(mot,question):
     score=0
@@ -9,7 +10,7 @@ def scoreTF(mot,question):
     score=score/len(listeTokens)
     return score
 
-def TFIDFQuestion(question,corpusDirectory):
+def matriceTFIDFQuestion(question,corpusDirectory):
     matrice=matriceTFIDF(corpusDirectory)
     IDF=dicoIDF(corpusDirectory)
     for discours in matrice.keys():

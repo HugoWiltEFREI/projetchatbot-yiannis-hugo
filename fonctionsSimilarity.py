@@ -1,9 +1,11 @@
-def lenVector(vector):
-    
-
 def produitScalaire(vecteurA, vecteurB):
-    M = len(vecteurA)
     produit = float(0)
-    for i in range(M):
-        produit += vecteurA[i]*vecteurB[i]
+    for discours in vecteurA.keys():
+        for mot in vecteurA[discours].keys():
+            produit+=vecteurA[discours][mot]*vecteurB[discours][mot]
     return produit
+
+import fonctionsTFIDF, TFIDFQuestion
+
+vectorQ=TFIDFQuestion.matriceTFIDFQuestion("Salut, je voudrais savoir qui est Yiannis Leblanc !","cleaned")
+print(produitScalaire(fonctionsTFIDF.matriceTFIDF("cleaned"),vectorQ))
