@@ -2,7 +2,8 @@ from math import sqrt
 def produitScalaire(vecteurA, vecteurB):
     produit = float(0)
     for mot in vecteurA.keys():
-        produit+=vecteurA[mot]*vecteurB[mot]
+        if mot in vecteurB.keys():
+            produit+=vecteurA[mot]*vecteurB[mot]
     return produit
 
 def normeVector(vector):

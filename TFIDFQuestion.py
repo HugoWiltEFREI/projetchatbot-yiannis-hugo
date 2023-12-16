@@ -7,7 +7,6 @@ def scoreTF(mot,question):
     for token in listeTokens:
         if token==mot:
             score+=1
-    score=score/len(listeTokens)
     return score
 
 def vectorTFIDFQuestion(question,corpusDirectory):
