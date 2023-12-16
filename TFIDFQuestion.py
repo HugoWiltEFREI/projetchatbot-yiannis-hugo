@@ -19,6 +19,3 @@ def vectorTFIDFQuestion(question,corpusDirectory):
             if not mot in vectorTFIDFQuestion.keys():
                 vectorTFIDFQuestion[mot]=scoreTF(mot,question)*IDF[mot]
     return vectorTFIDFQuestion
-
-while True:
-    print(vectorTFIDFQuestion(input("Saisir une question : "),"cleaned"))

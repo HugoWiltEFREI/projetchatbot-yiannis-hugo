@@ -14,6 +14,7 @@ def normeVector(vector):
 
 def similarityScore(vectorA,vectorB):
     score=produitScalaire(vectorA,vectorB)/(normeVector(vectorA)*normeVector(vectorB))
+    return score
 
 def bestDocument(vectorQuestion,matriceCorpus):
     meilleurs={"nom":None,"score":0}
@@ -24,4 +25,3 @@ def bestDocument(vectorQuestion,matriceCorpus):
             meilleurs["nom"]=document
             meilleurs["score"]=scoreDoc
     return meilleurs["nom"]
-
