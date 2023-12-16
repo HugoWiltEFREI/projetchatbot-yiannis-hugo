@@ -1,5 +1,5 @@
 from fonctionsTFIDF import termFrequency, getCleanedFilesNames, matriceTFIDF
-
+from fonctionsBonus import remove_accent
 
 def additionDico(listeDico, directory):
     dicoAdd = {}
@@ -10,12 +10,6 @@ def additionDico(listeDico, directory):
         dicoAdd.update(dictionnaire)
         file1.close()
     return dicoAdd
-
-
-def motImportantDiscours(dico):
-    valMax = max(dico, key=dico.get)
-    return valMax
-
 
 def motDit(mot,
            directory):  # Retourne un dico avec le nombre d'occurrence du mot si le mot et dit avec le nom du discours en clé et le nombre d'occurrence en valeur
@@ -80,3 +74,13 @@ def recurrentWordsList(directory):
                     recurrentWords.add(mot)
         discours.close()
     return recurrentWords
+
+def motImportantDiscours(dico,directory):
+    valMax= -100
+    mot = ""
+    for cle, val in dico.items():
+        if remove_accent(cle) not in uselessWordsList(directory):
+            if val>valMax:
+                valMax = val
+                mot = cle
+    return mot
