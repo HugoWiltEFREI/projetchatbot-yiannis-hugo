@@ -61,3 +61,4 @@ if __name__ == '__main__':
 
     else:
         print("Fonction inconnue, README.txt pour plus d'informations.")
+        
