@@ -1,11 +1,27 @@
+from math import sqrt 
 def produitScalaire(vecteurA, vecteurB):
     produit = float(0)
-    for discours in vecteurA.keys():
-        for mot in vecteurA[discours].keys():
-            produit+=vecteurA[discours][mot]*vecteurB[discours][mot]
+    for mot in vecteurA.keys():
+        produit+=vecteurA[mot]*vecteurB[mot]
     return produit
 
-import fonctionsTFIDF, TFIDFQuestion
+def normeVector(vector):
+    norme=0
+    for mot in vector.keys():
+        norme+=vector[mot]**2
+    norme=sqrt(norme)
+    return norme
 
-vectorQ=TFIDFQuestion.matriceTFIDFQuestion("Salut, je voudrais savoir qui est Yiannis Leblanc !","cleaned")
-print(produitScalaire(fonctionsTFIDF.matriceTFIDF("cleaned"),vectorQ))
+def similarityScore(vectorA,vectorB):
+    score=produitScalaire(vectorA,vectorB)/(normeVector(vectorA)*normeVector(vectorB))
+
+def bestDocument(vectorQuestion,matriceCorpus):
+    meilleurs={"nom":None,"score":0}
+    scoreDoc=0
+    for document in matriceCorpus.keys():
+        scoreDoc=similarityScore(vectorQuestion,matriceCorpus[document])
+        if scoreDoc>meilleurs[score]:
+            meilleurs["nom"]=document
+            meilleurs["score"]=scoreDoc
+    return meilleurs["nom"]
+

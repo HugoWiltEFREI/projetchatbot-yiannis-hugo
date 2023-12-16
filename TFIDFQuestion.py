@@ -10,10 +10,15 @@ def scoreTF(mot,question):
     score=score/len(listeTokens)
     return score
 
-def matriceTFIDFQuestion(question,corpusDirectory):
+def vectorTFIDFQuestion(question,corpusDirectory):
     matrice=matriceTFIDF(corpusDirectory)
     IDF=dicoIDF(corpusDirectory)
+    vectorTFIDFQuestion={}
     for discours in matrice.keys():
         for mot in matrice[discours].keys():
-            matrice[discours][mot]=scoreTF(mot,question)*IDF[mot]
-    return matrice
+            if not mot in vectorTFIDFQuestion.keys():
+                vectorTFIDFQuestion[mot]=scoreTF(mot,question)*IDF[mot]
+    return vectorTFIDFQuestion
+
+while True:
+    print(vectorTFIDFQuestion(input("Saisir une question : "),"cleaned"))
