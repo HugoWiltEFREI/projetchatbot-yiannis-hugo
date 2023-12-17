@@ -1,14 +1,16 @@
 from fonctionsDeBase import *
-from fonctionsTFIDF import *
 from fonctionsCleanedFolder import *
 from fonctionsSecondaires import *
 from fonctionsEnPlus import plot
 from fonctionsTokens import *
 from fonctionsSimilarity import *
+from fonctionsBonus import *
 
 if __name__ == '__main__':
-    partie = str(input("Partie I ou Chatbot? "))
+    print("————————————————————————Partie I ou Chatbot?————————————————————————")
+    partie = str(input())
     if partie == "Partie I":
+        print("——————————————————————————————Partie I——————————————————————————————")
         fct = str(input("Quelle fonction voulez-vous utiliser? : "))
 
         # Fonction qui sert à extraire le Nom d'un Président grâce au nom du document
@@ -44,9 +46,9 @@ if __name__ == '__main__':
         # Fait les questions de (Fonctionnalités à développer)
         elif fct == "programmes":
             print("La liste des mots avec un score TF-IDF de 0 est : ", uselessWordsList("cleaned"))
-            val = float(input("Entrez la rareté que vous voulez (0-1):"))
+            val = float(input("Entrez la rareté que vous voulez :"))
             print("La liste des mots avec un score TF-IDF de ", val, "est :", rareWordsList("cleaned", val))
-            print("Mot le + utilisé par Chirac est :", motImportantDiscours(additionDico(["Chirac1.txt", "Chirac2.txt"], "cleaned")))
+            print("Mot le + utilisé par Chirac est :", motImportantDiscours(additionDico(["Chirac1.txt", "Chirac2.txt"], "cleaned"), "cleaned"))
             print("Mot prononcé par :", motDit("nation", "cleaned"))
             print("Premier président à dire climat est", firstOccurrence("climat", "cleaned"))
             print("Premier président à dire écologie est", firstOccurrence("écologie", "cleaned"))
@@ -65,18 +67,50 @@ if __name__ == '__main__':
 
         else:
             print("Fonction inconnue, README.txt pour plus d'informations.")
-    elif partie =="Chatbot":
-        print("————————————————————————Chatbot————————————————————————")
+    elif partie == "Chatbot":
+        print("——————————————————————————————Chatbot!——————————————————————————————")
         fct = str(input("Quelle fonction voulez-vous utiliser? : "))
 
         if fct == "vecteurTFIDF":
             question = str(input("Entrez la question"))
             directory = str(input("Enter directory : "))
             print(vectorTFIDFQuestion(question, directory))
-        elif fct =="Chatbot":
+
+        elif fct == "tokenList":
+            question = str(input("Entrez votre question:"))
+            print(tokenList(question))
+
+        elif fct == "rechercheCorpus":
+            directory = str(input("Enter directory : "))
+            question = str(input("Entrez votre question:"))
+            print(rechercheCorpus(question, directory))
+
+        elif fct == "scoreTF":
+            mot = str(input("Entrez un mot : "))
+            question = str(input("Entrez votre question:"))
+            print(scoreTF(mot, question))
+
+        elif fct == "vectorTFIDFQuestion":
+            directory = str(input("Enter directory : "))
+            question = str(input("Entrez votre question:"))
+            print(vectorTFIDFQuestion(question, directory))
+
+        elif fct == "bestDocument":
+            directory = str(input("Enter directory : "))
+            question = str(input("Entrez votre question:"))
+            vectorQuestion = vectorTFIDFQuestion(question, directory)
+            matriceCorpus = matriceTFIDF(directory)
+            print("Le document le plus similaire est :", bestDocument(vectorQuestion, matriceCorpus))
+
+        elif fct == "rechercheFirstOccurence":
+            mot = str(input("Entrez un mot : "))
+            file = str(input("Entrez un nom de fichier de speeches"))
+            print(rechercheFirstOccurence(mot, file))
+
+        elif fct == "Chatbot":
             encore = True
             directory = str(input("Enter directory : "))
-            while encore == True:
+            while encore:
                 question = str(input("Que puis-je faire pour vous? "))
                 print(politesse(question, directory))
                 encore = str(input("Avez vous encore une question? "))
@@ -84,5 +118,17 @@ if __name__ == '__main__':
                     encore = True
                 else:
                     encore = False
+
+        elif fct == "Bonus":
+            print("⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕Bonus!⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕")
+            fct = str(input("Quelle fonction voulez-vous utiliser? : "))
+            if fct == "removeAccent":
+                chaineDeC = str(input("Entrez une chaine de caractère"))
+                print(remove_accent(chaineDeC))
+
+            elif fct == "textesBonus":
+                directory = str(input("Enter directory : "))
+                listeDiscours = getCleanedFilesNames(directory)
+
         else:
             print("Fonction inconnue, README.txt pour plus d'informations.")
