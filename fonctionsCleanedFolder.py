@@ -11,7 +11,7 @@ def identifySpeChr(car):
 
 
 # pour 1 fichier discours la fonction crée son fichier de tokens dans le dossier cleaned
-def createTokenFiles(nomDiscours):
+def createTokenFiles(nomDiscours : str):
     with open("speeches/{}".format(nomDiscours), "r", encoding="utf8") as f1, open(
             "cleaned/{}".format(nomDiscours[11:]), "w", encoding="utf8") as f2:
         inMot = False
@@ -22,7 +22,6 @@ def createTokenFiles(nomDiscours):
                     inMot = False
             else:
                 inMot = traiterLettre(car, inMot, f2)
-
 
 
 # créée pour diviser la fct createTokenFiles() en deux fonctions plus petites
