@@ -2,7 +2,9 @@ import os
 from math import log10
 
 
-def termFrequency(chaineDeC):  # On définie la fct nombreOccurrence avec comme argument chaine de caractère
+def termFrequency(chaineDeC: str):  # On définie la fct nombreOccurrence avec comme argument chaine de caractère
+    for i in "./,?!:":
+        chaineDeC = chaineDeC.replace(i, "")
     nombreOcc = dict()  # On créer un dico vide où l'on va stocker le nombre d'occurrence des mots dans la chaine
     listeDeMots = chaineDeC.split()  # On délimite les mots en regardant où sont les espaces et on les stocks dans un liste
     for mots in listeDeMots:
@@ -14,7 +16,7 @@ def termFrequency(chaineDeC):  # On définie la fct nombreOccurrence avec comme 
 
 
 # La fonction renvoie un tuple des noms de chaque fichier du dossier directory
-def getCleanedFilesNames(directory):
+def getCleanedFilesNames(directory: str):
     listeCleaned = []
     for file in os.listdir(directory):
         if file.endswith(".txt"):
@@ -22,7 +24,7 @@ def getCleanedFilesNames(directory):
     return tuple(listeCleaned)
 
 
-def dicoIDF(directory):
+def dicoIDF(directory: str):
     dicoMots = {}
     nbFichier = 0
     filesList = getCleanedFilesNames(directory)
@@ -42,7 +44,7 @@ def dicoIDF(directory):
     return dicoMots
 
 
-def matriceTFIDF(directory):
+def matriceTFIDF(directory: str):
     TFIDF = {}
     filesList = getCleanedFilesNames(directory)
     IDF = dicoIDF(directory)
