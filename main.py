@@ -47,7 +47,7 @@ if __name__ == '__main__':
         elif fct == "programmes":
             print("La liste des mots avec un score TF-IDF de 0 est : ", uselessWordsList("cleaned"))
             val = float(input("Entrez la rareté que vous voulez :"))
-            print("La liste des mots avec un score TF-IDF de ", val, "est :", rareWordsList("cleaned", val))
+            print("La liste des mots avec un score TF-IDF de ", val, "+ est :", rareWordsList("cleaned", val))
             print("Mot le + utilisé par Chirac est :", motImportantDiscours(additionDico(["Chirac1.txt", "Chirac2.txt"], "cleaned"), "cleaned"))
             print("Mot prononcé par :", motDit("nation", "cleaned"))
             print("Premier président à dire climat est", firstOccurrence("climat", "cleaned"))
