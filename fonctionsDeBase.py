@@ -1,13 +1,13 @@
 import os
 
 
-def extractNomsPres(fichier):
+def extractNomsPres(fichier: str):
     for i in "0123456789":
         fichier = fichier.replace(i, "")  # On supprime les valeurs numériques
     return fichier[11:-4]  # On effectue un slicing pour récupérer uniquement le nom
 
 
-def associationTxtPrenomPres(nom):
+def associationTxtPrenomPres(nom: str):
     trouve = False  # Au début, on n'a pas trouvé le prénom, donc trouve = False
     ListeNomsPres = [["Chirac", "Jacques"], ["Giscard dEstaing", "Valéry"], ["Hollande", "François"],
                      ["Macron", "Emmanuel"], ["Mitterand", "François"],
@@ -21,7 +21,7 @@ def associationTxtPrenomPres(nom):
         return "Inconnu au bataillon"  # Si non, on affiche que l'on n'a pas trouvé
 
 
-def list_of_files(directory, extension):
+def list_of_files(directory: str, extension: str):
     files_names = []  # On créé une liste vide
     for filename in os.listdir(directory):  # On parcours les documents dans le directory
         if filename.endswith(extension):

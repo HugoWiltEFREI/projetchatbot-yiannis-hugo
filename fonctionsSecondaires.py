@@ -1,23 +1,20 @@
 from fonctionsTFIDF import termFrequency, getCleanedFilesNames, matriceTFIDF
+from fonctionsBonus import remove_accent
 
 
-def additionDico(listeDico, directory):
+def additionDico(listeDico: list, directory: str):
     dicoAdd = {}
     for dico in listeDico:
         with open("{}/{}".format(directory, dico), 'r', encoding="utf8") as file1:
             chaine = file1.read()
             dictionnaire = termFrequency(chaine)
         dicoAdd.update(dictionnaire)
+        file1.close()
     return dicoAdd
 
 
-def motImportantDiscours(dico):
-    valMax = max(dico, key=dico.get)
-    return valMax
-
-
-def motDit(mot,
-           directory):  # Retourne un dico avec le nombre d'occurrence du mot si le mot et dit avec le nom du discours en clé et le nombre d'occurrence en valeur
+def motDit(mot: str,
+           directory: str):  # Retourne un dico avec le nombre d'occurrence du mot si le mot et dit avec le nom du discours en clé et le nombre d'occurrence en valeur
     dico = {}  # retourne aussi le doc où le mot est dit le + de fois
     for discours in getCleanedFilesNames(directory):
         with open("{}/{}".format(directory, discours), 'r', encoding="utf8") as file1:
@@ -26,10 +23,11 @@ def motDit(mot,
             if mot in dictionnaire.keys():
                 dico[discours] = dictionnaire[mot]
         motMax = max(dico, key=dico.get)
+        file1.close()
     return dico, motMax[:-4]
 
 
-def firstOccurrence(motCherche, directoryOccurrence):
+def firstOccurrence(motCherche: str, directoryOccurrence):
     dicoOccurrence = {}  # retourne aussi le doc où le mot est dit le + de fois
     for discoursOccurrence in getCleanedFilesNames(directoryOccurrence):
         with open("{}/{}".format(directoryOccurrence, discoursOccurrence), 'r', encoding="utf8") as file1:
@@ -38,6 +36,7 @@ def firstOccurrence(motCherche, directoryOccurrence):
                 if str(listeMot[i]) == motCherche:
                     dicoOccurrence[discoursOccurrence] = i + 1
                     break
+            file1.close()
     if dicoOccurrence == {}:
         return "personne"
     else:
@@ -45,7 +44,7 @@ def firstOccurrence(motCherche, directoryOccurrence):
         return valMin[:-4]
 
 
-def uselessWordsList(directory):
+def uselessWordsList(directory: str):
     matrice = matriceTFIDF(directory)
     useless = set()
     for discours in matrice.keys():
@@ -55,7 +54,7 @@ def uselessWordsList(directory):
     return useless
 
 
-def rareWordsList(directory, val):
+def rareWordsList(directory: str, val: float):
     matrice = matriceTFIDF(directory)
     rare = set()
     for discours in matrice.keys():
@@ -65,7 +64,7 @@ def rareWordsList(directory, val):
     return rare
 
 
-def recurrentWordsList(directory):
+def recurrentWordsList(directory: str):
     scoreMinimum = 2
     uselessWords = uselessWordsList(directory)
     recurrentWords = set()
@@ -75,4 +74,16 @@ def recurrentWordsList(directory):
             for mot in dicoTF.keys():
                 if dicoTF[mot] < scoreMinimum and mot in uselessWords:
                     recurrentWords.add(mot)
+        discours.close()
     return recurrentWords
+
+
+def motImportantDiscours(dico: dict, directory: str):
+    valMax = -100
+    mot = ""
+    for cle, val in dico.items():
+        if remove_accent(cle) not in uselessWordsList(directory):
+            if val > valMax:
+                valMax = val
+                mot = cle
+    return mot

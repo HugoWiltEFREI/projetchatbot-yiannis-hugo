@@ -2,7 +2,7 @@ from fonctionsTFIDF import termFrequency, getCleanedFilesNames
 import matplotlib.pyplot as plt
 
 
-def plot(directory, val):
+def plot(directory: str, val: int):
     dico2 = {}
     filesList = getCleanedFilesNames(directory)
     for file in filesList:
