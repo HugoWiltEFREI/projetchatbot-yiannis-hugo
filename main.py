@@ -6,20 +6,21 @@ from fonctionsTokens import *
 from fonctionsSimilarity import *
 from fonctionsBonus import *
 
+
 if __name__ == '__main__':
     print("————————————————————————Partie I ou Chatbot?————————————————————————")
-    partie = str(input())
-    if partie == "Partie I":
+    partie = str(input()).lower()
+    if partie == "partie i":
         print("——————————————————————————————Partie I——————————————————————————————")
-        fct = str(input("Quelle fonction voulez-vous utiliser? : "))
+        fct = str(input("Quelle fonction voulez-vous utiliser? : ")).lower()
 
         # Fonction qui sert à extraire le Nom d'un Président grâce au nom du document
-        if fct == "extractNomsPres" or fct == "extraction":
-            print("Quel nom de fichier voulez vous extraire")  # On demande de quel document on veux connaitre le Président
+        if fct == "extractnomspres" or fct == "extraction":
+            print("Quel nom de fichier voulez vous extraire : ")  # On demande de quel document on veux connaitre le Président
             fichier = str(input())  # On stock le nom du document de la variable nom
             print(extractNomsPres(fichier))  # On éxécute la fonction avec la variable nom et on imprime
 
-        elif fct == "associationTxtPrenomPres" or fct == "association":
+        elif fct == "associationtxtprenompres" or fct == "association":
             print("Quel est le nom du Président : ")
             nom = str(input())
             print(associationTxtPrenomPres(nom))
@@ -28,18 +29,18 @@ if __name__ == '__main__':
             extension = str(input("extension : "))
             print(list_of_files("speeches", extension))
 
-        elif fct == "createCleanedFolder" or fct == "nettoyage":
+        elif fct == "createcleanedfolder" or fct == "nettoyage":
             createCleanedFolder()
 
-        elif fct == "termFrequency" or fct == "TF":
+        elif fct == "termfrequency" or fct == "tf":
             directory = str(input("Enter a text : "))
             print(termFrequency(directory))
 
-        elif fct == "dicoIDF" or fct == "IDF":
+        elif fct == "dicoidf" or fct == "idf":
             directory = str(input("Enter directory : "))
             print(dicoIDF(directory))
 
-        elif fct == "TF-IDF":
+        elif fct == "tfidf":
             directory = str(input("Enter directory : "))
             print(matriceTFIDF(directory))
 
@@ -61,53 +62,54 @@ if __name__ == '__main__':
 
         # Plot un graph qui montre le nombre d'occurrence de chaque mots > à val pour chaque documents du directory
         elif fct == "plot":
-            directory = str(input("Enter directory: "))
-            val = int(input("Enter a value above 20: "))
+            directory = str(input("Enter directory : "))
+            val = int(input("Enter a value above 20 : "))
             plot(directory, val)
 
         else:
             print("Fonction inconnue, README.txt pour plus d'informations.")
-    elif partie == "Chatbot":
-        print("——————————————————————————————Chatbot!——————————————————————————————")
-        fct = str(input("Quelle fonction voulez-vous utiliser? : "))
 
-        if fct == "vecteurTFIDF":
-            question = str(input("Entrez la question"))
+    elif partie == "chatbot":
+        print("——————————————————————————————Chatbot!——————————————————————————————")
+        fct = str(input("Quelle fonction voulez-vous utiliser? : ")).lower()
+
+        if fct == "vecteurtfidd":
+            question = str(input("Entrez la question : "))
             directory = str(input("Enter directory : "))
             print(vectorTFIDFQuestion(question, directory))
 
-        elif fct == "tokenList":
-            question = str(input("Entrez votre question:"))
+        elif fct == "tokenlist":
+            question = str(input("Entrez votre question : "))
             print(tokenList(question))
 
-        elif fct == "rechercheCorpus":
+        elif fct == "recherchecorpus":
             directory = str(input("Enter directory : "))
-            question = str(input("Entrez votre question:"))
+            question = str(input("Entrez votre question : "))
             print(rechercheCorpus(question, directory))
 
-        elif fct == "scoreTF":
+        elif fct == "scoretf":
             mot = str(input("Entrez un mot : "))
-            question = str(input("Entrez votre question:"))
+            question = str(input("Entrez votre question : "))
             print(scoreTF(mot, question))
 
-        elif fct == "vectorTFIDFQuestion":
+        elif fct == "vectortfidfquestion":
             directory = str(input("Enter directory : "))
-            question = str(input("Entrez votre question:"))
+            question = str(input("Entrez votre question : "))
             print(vectorTFIDFQuestion(question, directory))
 
-        elif fct == "bestDocument":
+        elif fct == "bestdocument":
             directory = str(input("Enter directory : "))
-            question = str(input("Entrez votre question:"))
+            question = str(input("Entrez votre question : "))
             vectorQuestion = vectorTFIDFQuestion(question, directory)
             matriceCorpus = matriceTFIDF(directory)
             print("Le document le plus similaire est :", bestDocument(vectorQuestion, matriceCorpus))
 
-        elif fct == "rechercheFirstOccurence":
+        elif fct == "recherchefirstoccurence":
             mot = str(input("Entrez un mot : "))
-            file = str(input("Entrez un nom de fichier de speeches"))
+            file = str(input("Entrez un nom de fichier de speeches : "))
             print(rechercheFirstOccurence(mot, file))
 
-        elif fct == "Chatbot":
+        elif fct == "chatbot":
             encore = True
             directory = str(input("Enter directory : "))
             while encore:
@@ -119,14 +121,15 @@ if __name__ == '__main__':
                 else:
                     encore = False
 
-        elif fct == "Bonus":
+        elif fct == "bonus":
             print("⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕Bonus!⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕")
-            fct = str(input("Quelle fonction voulez-vous utiliser? : "))
-            if fct == "removeAccent":
-                chaineDeC = str(input("Entrez une chaine de caractère"))
+            fct = str(input("Quelle fonction voulez-vous utiliser? : ")).lower()
+
+            if fct == "removeaccent":
+                chaineDeC = str(input("Entrez une chaine de caractère : "))
                 print(remove_accent(chaineDeC))
 
-            elif fct == "textesBonus":
+            elif fct == "textesbonus":
                 directory = str(input("Enter directory : "))
                 listeDiscours = getCleanedFilesNames(directory)
 
