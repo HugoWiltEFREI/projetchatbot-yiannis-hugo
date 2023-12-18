@@ -16,15 +16,16 @@ def normeVector(vector: dict):
     for mot in vector.keys():
         norme += vector[mot] ** 2
     norme = sqrt(norme)
-    if norme != 0:
-        return norme
-    else:
-        return 1
+    return norme
 
 
 def similarityScore(vectorA: dict, vectorB: dict):
-    score = produitScalaire(vectorA, vectorB) / (normeVector(vectorA) * normeVector(vectorB))
+    if normeVector(vectorA) != 0 and normeVector(vectorB) != 0:
+        score = produitScalaire(vectorA, vectorB) / (normeVector(vectorA) * normeVector(vectorB))
+    else:
+        score = 0
     return score
+
 
 
 def equivalentNom(nomFichier: str):
@@ -32,12 +33,16 @@ def equivalentNom(nomFichier: str):
 
 
 def bestDocument(vectorQuestion: dict, matriceCorpus: dict):
+    somme_score = 0
     meilleurs = {"nom": "Aucun discours ne correspond à cette question.", "score": 0}
     for document in matriceCorpus.keys():
         scoreDoc = similarityScore(vectorQuestion, matriceCorpus[document])
+        somme_score += scoreDoc
         if scoreDoc > meilleurs["score"]:
             meilleurs["nom"] = document
             meilleurs["score"] = scoreDoc
+        if somme_score == 0.0:
+            return "Aucun document similaire"
     return equivalentNom(meilleurs["nom"])
 
 
@@ -55,6 +60,7 @@ def rechercheFirstOccurence(mot: str, document: str):
                 return liste[i]
 
 
+
 def politesse(question: str, directory: str):
     question_starters = {
         "Comment": "Après analyse, ",
@@ -62,11 +68,14 @@ def politesse(question: str, directory: str):
         "Peux-tu": "Oui, bien sûr!"
     }
     document = bestDocument(vectorTFIDFQuestion(question, directory), matriceTFIDF(directory))
-    reponseQuestion = rechercheFirstOccurence("climat", document)
-    debutDePhrase = question.split()[0]
-    for keys, values in question_starters.items():
-        if str(keys) == debutDePhrase:
-            if str(keys) == "Peux-tu":
-                return values + " " + reponseQuestion.capitalize()
-            else:
-                return values + " " + reponseQuestion
+    if document != "Aucun document similaire":
+        reponseQuestion = rechercheFirstOccurence("climat", document)
+        debutDePhrase = question.split()[0]
+        for keys, values in question_starters.items():
+            if str(keys) == debutDePhrase:
+                if str(keys) == "Peux-tu":
+                    return values + " " + reponseQuestion.capitalize()
+                else:
+                    return values + " " + reponseQuestion
+    else:
+        return "Aucun document similaire"
