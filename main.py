@@ -1,10 +1,10 @@
-from fonctionsDeBase import *
-from fonctionsCleanedFolder import *
+from fonctionsDeBase import extractNomsPres, associationTxtPrenomPres, list_of_files
+from fonctionsCleanedFolder import createCleanedFolder
 from fonctionsSecondaires import *
 from fonctionsEnPlus import plot
 from fonctionsTokens import *
-from fonctionsSimilarity import *
-from fonctionsBonus import *
+from fonctionsSimilarity import bestDocument, rechercheFirstOccurence, politesse
+from fonctionsBonus import remove_accent
 
 
 if __name__ == '__main__':
