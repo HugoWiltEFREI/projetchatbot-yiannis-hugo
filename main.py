@@ -6,6 +6,7 @@ from fonctionsTokens import *
 from fonctionsSimilarity import bestDocument, rechercheFirstOccurence, politesse
 from fonctionsBonus import remove_accent
 
+
 def mainMenu():
     while True:
         if __name__ == '__main__':
@@ -17,13 +18,20 @@ def mainMenu():
         elif partie == "chatbot":
             chatbox()
 
+        elif partie == "help":
+            with open("README.txt", "r", encoding="utf8") as f:
+                for ligne in f:
+                    print(ligne)
+
+
 def partIMenu():
     print("——————————————————————————————Partie I——————————————————————————————")
     fct = str(input("Quelle fonction voulez-vous utiliser? : ")).lower()
 
     # Fonction qui sert à extraire le Nom d'un Président grâce au nom du document
     if fct == "extractnomspres" or fct == "extraction":
-        print("Quel nom de fichier voulez vous extraire : ")  # On demande de quel document on veux connaitre le Président
+        print(
+            "Quel nom de fichier voulez vous extraire : ")  # On demande de quel document on veux connaitre le Président
         fichier = str(input())  # On stock le nom du document de la variable nom
         print(extractNomsPres(fichier))  # On éxécute la fonction avec la variable nom et on imprime
 
@@ -56,7 +64,8 @@ def partIMenu():
         print("La liste des mots avec un score TF-IDF de 0 est : ", uselessWordsList("cleaned"))
         val = float(input("Entrez la rareté que vous voulez :"))
         print("La liste des mots avec un score TF-IDF de ", val, "+ est :", rareWordsList("cleaned", val))
-        print("Mot le + utilisé par Chirac est :", motImportantDiscours(additionDico(["Chirac1.txt", "Chirac2.txt"], "cleaned"), "cleaned"))
+        print("Mot le + utilisé par Chirac est :",
+              motImportantDiscours(additionDico(["Chirac1.txt", "Chirac2.txt"], "cleaned"), "cleaned"))
         print("Mot prononcé par :", motDit("nation", "cleaned"))
         print("Premier président à dire climat est", firstOccurrence("climat", "cleaned"))
         print("Premier président à dire écologie est", firstOccurrence("écologie", "cleaned"))
@@ -68,8 +77,14 @@ def partIMenu():
         val = int(input("Enter a value above 20 : "))
         plot(directory, val)
 
+    elif fct == "help":
+        with open("README.txt", "r", encoding="utf8") as f:
+            for ligne in f:
+                print(ligne)
+
     else:
         print("Fonction inconnue, README.txt pour plus d'informations.")
+
 
 def chatbox():
     print("——————————————————————————————Chatbot!——————————————————————————————")
@@ -134,7 +149,7 @@ def chatbox():
         elif fct == "textesbonus":
             directory = str(input("Enter directory : "))
             listeDiscours = getCleanedFilesNames(directory)
-            
+
     elif fct == "help":
         with open("README.txt", "r", encoding="utf8") as f:
             for ligne in f:
@@ -142,7 +157,8 @@ def chatbox():
     else:
         print("Fonction inconnue, README.txt pour plus d'informations.")
 
-#+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-        #lancement du programme
+
+# +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+# lancement du programme
 
 mainMenu()
