@@ -9,7 +9,10 @@ def tokenList(chaineDeCToken: str):
     for _ in chaineDeCToken:
         chaineDeCToken = chaineDeCToken.lower()
     questionToken = chaineDeCToken.split()
-    return questionToken
+    if len(questionToken)!= 0:
+        return questionToken
+    else:
+        return "Pas dans le corpus"
 
 
 def rechercheCorpus(chaineDeCRecherche: str, directory: str):
